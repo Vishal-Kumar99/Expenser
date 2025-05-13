@@ -1,0 +1,42 @@
+﻿<Window
+    x:Class="Expenser.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Expenser"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Expenser"
+    Width="1000"
+    Height="600"
+    AllowsTransparency="True"
+    Background="Transparent"
+    MouseDown="Window_MouseDown"
+    ResizeMode="NoResize"
+    SizeToContent="WidthAndHeight"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Border
+        Background="#F9F7ED"
+        BorderBrush="Black"
+        BorderThickness="2"
+        CornerRadius="10">
+        <Grid>
+            <Frame
+                x:Name="MainFrame"
+                NavigationUIVisibility="Hidden"
+                Source="/Pages/LoginPage.xaml" />
+            <Button
+                x:Name="CloseBtn"
+                Width="50"
+                Height="40"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                Click="CloseBtn_Click"
+                FontSize="24"
+                Style="{StaticResource CloseBtn}" />
+        </Grid>
+    </Border>
+</Window>
