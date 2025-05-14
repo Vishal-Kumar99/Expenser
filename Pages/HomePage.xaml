@@ -4,92 +4,233 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Expenser.Pages"
+    xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:n="clr-namespace:Expenser"
+    xmlns:uc="clr-namespace:Expenser.UserControls"
+    xmlns:vm="clr-namespace:Expenser.ViewModel"
     Title="HomePage"
     d:DesignHeight="900"
-    d:DesignWidth="1400"
+    d:DesignWidth="1800"
     Background="#F9F7ED"
     mc:Ignorable="d">
 
     <Grid>
-        <StackPanel
-            Grid.Row="1"
-            Width="1100"
-            Margin="0,60">
-            <TextBlock
-                x:Name="WelcomeTxt"
-                FontSize="30"
-                FontWeight="Bold">
-                <Run Text="Welcome,"/>
-                <Run x:Name="UserTxt" Foreground="DodgerBlue"/>
-            </TextBlock>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="300" />
+        </Grid.ColumnDefinitions>
 
-            <StackPanel
-                Margin="0,30"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Orientation="Horizontal">
-                
-                <Border
-                    Width="300"
-                    Height="150"
-                    Margin="30"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-                    <Button
-                        Background="White"
-                        Content="New Expense"
-                        FontSize="20" />
-                </Border>
+        <Border
+            Grid.Column="0"
+            BorderBrush="LightGray"
+            BorderThickness="0,0,2,0">
+            <DockPanel>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
 
-                <Border
-                    Width="300"
-                    Height="150"
-                    Margin="30"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-                    <Button
-                        Background="White"
-                        Content="View Expense"
-                        FontSize="20" />
-                </Border>
-
-                <Border
-                    Width="300"
-                    Height="150"
-                    Margin="30"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-                    <Button
-                        Background="White"
-                        Content="Import Expense"
-                        FontSize="20" />
-                </Border>
-            </StackPanel>
-
-            <Border
-                Height="52"
-                Margin="0,50,0,0"
-                BorderBrush="Black"
-                BorderThickness="1">
-                <DockPanel Background="White">
                     <TextBlock
-                        Padding="0,10"
+                        Grid.Row="0"
+                        Margin="20,10"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom"
+                        FontSize="18"
+                        FontWeight="SemiBold"
+                        Text="Top Expenses" />
+                    <Border
+                        Grid.Row="1"
+                        Width="250"
+                        Height="40"
+                        Margin="20,0"
+                        BorderBrush="Gray"
+                        BorderThickness="1"
+                        CornerRadius="5">
+                        <TextBox
+                            x:Name="SearchBox"
+                            Padding="10,0"
+                            FontSize="16" />
+                    </Border>
+                </Grid>
+            </DockPanel>
+        </Border>
+
+        <DockPanel Grid.Column="1">
+            <Grid Margin="30">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <TextBlock
+                    Grid.Row="0"
+                    Padding="10"
+                    FontSize="30"
+                    FontWeight="Bold"
+                    Text="Home" />
+
+                <Border Grid.Row="1" Style="{StaticResource HomeBorder}">
+                    <StackPanel
                         HorizontalAlignment="Center"
-                        FontSize="24"
-                        Text="Recent Expenses" />
-                </DockPanel>
-            </Border>
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal">
 
-            <StackPanel>
-                <ListBox
-                    Height="100"
-                    d:ItemsSource="{d:SampleData ItemCount=5}"
-                    Background="LightGray" />
-            </StackPanel>
-        </StackPanel>
+                        <Button
+                            Margin="0,0,40,0"
+                            Content="Add Expense"
+                            Style="{StaticResource NavHomeButton}" />
 
+                        <Button
+                            Margin="40,0"
+                            Content="View Expense"
+                            Style="{StaticResource NavHomeButton}" />
+
+                        <Button
+                            Margin="40,0"
+                            Content="Import Expense"
+                            Style="{StaticResource NavHomeButton}" />
+                        
+                        <Button
+                            Margin="40,0,0,0"
+                            Content="Expense Type"
+                            Style="{StaticResource NavHomeButton}" />
+                    </StackPanel>
+
+                </Border>
+
+                <Grid Grid.Row="2" Margin="0,20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock
+                        Margin="10"
+                        FontSize="20"
+                        FontWeight="SemiBold"
+                        Text="Monthly Expense Summary" />
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Border Grid.Column="0" Style="{StaticResource HomeBorder}">
+
+                            <StackPanel
+                                Height="auto"
+                                HorizontalAlignment="Center"
+                                Orientation="Horizontal">
+
+                                <!--  Total Expense Card  -->
+                                <uc:ExpenseCardControl
+                                    Width="300"
+                                    Margin="0,10,20,10"
+                                    BackgroundColor="IndianRed"
+                                    ExpenseMonth="January"
+                                    ExpenseTitle="Total Expense"
+                                    ForegroundColor="White"
+                                    MonthBackground="White"
+                                    MonthForeground="IndianRed"
+                                    TotalExpense="₹1500" />
+
+                                <!--  Remaining Balance Card  -->
+                                <uc:ExpenseCardControl
+                                    Width="300"
+                                    Margin="20,10,0,10"
+                                    BackgroundColor="Teal"
+                                    ExpenseMonth="January"
+                                    ExpenseTitle="Remaining Balance"
+                                    ForegroundColor="White"
+                                    MonthBackground="White"
+                                    MonthForeground="Teal"
+                                    TotalExpense="₹2000" />
+                            </StackPanel>
+                        </Border>
+
+                        <Border Grid.Column="1" Style="{StaticResource HomeBorder}">
+                            <lvc:PieChart
+                                x:Name="ExpenseDonut"
+                                DataContext="{Binding DonutViewModel, Source={StaticResource ViewModelLocator}}"
+                                LegendPosition="Right"
+                                Series="{Binding DonutSeries}" />
+                        </Border>
+                    </Grid>
+                </Grid>
+
+                <Border Grid.Row="3" Style="{StaticResource HomeBorder}">
+                    <lvc:CartesianChart
+                        DataContext="{Binding LineChartViewModel, Source={StaticResource ViewModelLocator}}"
+                        Series="{Binding LineSeries}"
+                        Title="{Binding Title}"
+                        XAxes="{Binding XAxis}"/>
+                </Border>
+            </Grid>
+        </DockPanel>
+
+        <Border
+            Grid.Column="2"
+            BorderBrush="LightGray"
+            BorderThickness="2,0,0,0">
+            <DockPanel>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="70" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <TextBlock
+                                Margin="20,10,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Bottom"
+                                FontSize="14"
+                                FontWeight="SemiBold"
+                                Foreground="Gray"
+                                Text="Logged User" />
+                            <TextBlock
+                                x:Name="UserTxt"
+                                Margin="20,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Bottom"
+                                FontSize="18"
+                                FontWeight="SemiBold"
+                                Text="Vishal Kumar" />
+                        </StackPanel>
+
+                        <DockPanel Grid.Column="1">
+                            <Button
+                                x:Name="ProfileBtn"
+                                Width="45"
+                                Height="45"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Bottom"
+                                Background="{Binding ProfileImage, FallbackValue=DodgerBlue}"
+                                BorderBrush="Transparent"
+                                Content="{Binding ProfileContent, Mode=OneWay}"
+                                Cursor="Hand"
+                                DataContext="{Binding ProfileViewModel, Source={StaticResource ViewModelLocator}}"
+                                FontSize="24"
+                                FontWeight="Bold"
+                                Foreground="White"
+                                Style="{DynamicResource ProfileBtn}" />
+                        </DockPanel>
+                    </Grid>
+                </Grid>
+            </DockPanel>
+        </Border>
     </Grid>
 
 </Page>

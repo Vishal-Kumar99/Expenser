@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,9 +20,11 @@ namespace Expenser.Models
 
     public class User
     {
+        [Key]
         public int Id { get; set; }
         public required string Username { get; set; }
         public required string Password { get; set; }
         public required string PasswordHint { get; set; }
+        public string? ProfileImagePath { get; set; }
     }
 }

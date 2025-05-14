@@ -1,5 +1,6 @@
 ﻿using Expenser.Models;
 using Expenser.Pages.NewExpense;
+using Expenser.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,6 +40,9 @@ namespace Expenser.Pages
             {
                 LoadUserData();
             }
+
+            // Load the Donut chart data
+            //DataContext = new DonutViewModel();
         }
 
         private void LoadUserData()
@@ -46,7 +50,7 @@ namespace Expenser.Pages
             var user = UserSession.CurrentUser;
             if (user != null)
             {
-                UserTxt.Text = $"{user.Username}!";
+                UserTxt.Text = $"{user.Username}";
             }
         }
     }

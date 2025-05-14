@@ -42,7 +42,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="150" />
+                    <ColumnDefinition Width="100" />
                 </Grid.ColumnDefinitions>
 
                 <Border
@@ -118,9 +118,9 @@
                             VerticalContentAlignment="Center"
                             Click="HomeMinimizeBtn_Click"
                             Content="—"
-                            Tag="Minimize"
                             FontSize="20"
-                            Style="{StaticResource HomeCloseBtn}" />
+                            Style="{StaticResource HomeCloseBtn}"
+                            Tag="Minimize" />
 
                         <!--<Button
                             x:Name="HomeMaximizeBtn"
@@ -140,9 +140,9 @@
                             VerticalContentAlignment="Center"
                             Click="HomeCloseBtn_Click"
                             Content="✕"
-                            Tag="Close"
                             FontSize="20"
-                            Style="{StaticResource HomeCloseBtn}" />
+                            Style="{StaticResource HomeCloseBtn}"
+                            Tag="Close" />
                     </Grid>
                 </DockPanel>
             </Grid>

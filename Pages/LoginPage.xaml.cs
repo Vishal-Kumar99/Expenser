@@ -25,6 +25,8 @@ namespace Expenser.Pages
         public LoginPage()
         {
             InitializeComponent();
+
+            UsernameTxt.Focus();
         }
 
         private void LoginBtn_Click(object sender, RoutedEventArgs e)
