@@ -9,7 +9,6 @@ namespace Expenser.Models
 {
     public class ViewModelLocator
     {
-        public ProfileViewModel ProfileViewModel => ProfileViewModel.Instance;
         public DonutViewModel DonutViewModel => DonutViewModel.Instance;
         public BarGraphViewModel BarGraphViewModel => BarGraphViewModel.Instance;
         public LineChartViewModel LineChartViewModel => LineChartViewModel.Instance;

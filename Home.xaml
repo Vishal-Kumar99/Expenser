@@ -99,7 +99,7 @@
                         </MenuItem>
                         <MenuItem Header="_Help">
                             <MenuItem Header="_View Help" />
-                            <MenuItem Header="_v1.0" />
+                            <MenuItem Header="_v1.1" />
                         </MenuItem>
                     </Menu>
                 </DockPanel>

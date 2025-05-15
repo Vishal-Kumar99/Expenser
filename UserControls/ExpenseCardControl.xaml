@@ -5,28 +5,31 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Expenser.UserControls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Width="300"
     d:DesignHeight="450"
     d:DesignWidth="300"
-    Width="300"
     mc:Ignorable="d">
 
     <UserControl.Resources>
         <Style x:Key="UserControlBorder" TargetType="Border">
             <Setter Property="Effect">
                 <Setter.Value>
-                    <DropShadowEffect Color="Black" Opacity="0.15" BlurRadius="10"/>
+                    <DropShadowEffect
+                        BlurRadius="10"
+                        Opacity="0.15"
+                        Color="Black" />
                 </Setter.Value>
             </Setter>
         </Style>
     </UserControl.Resources>
-    
+
     <Border
         Background="{Binding BackgroundColor, RelativeSource={RelativeSource AncestorType=UserControl}}"
         BorderBrush="Transparent"
         BorderThickness="0"
         CornerRadius="12"
         Style="{StaticResource UserControlBorder}">
-        
+
         <DockPanel LastChildFill="True">
             <Grid>
                 <Grid.RowDefinitions>
@@ -43,10 +46,10 @@
                     Grid.Row="0"
                     Margin="10,10"
                     FontSize="20"
-                    TextWrapping="Wrap"
                     FontWeight="SemiBold"
                     Foreground="{Binding ForegroundColor, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                    Text="{Binding ExpenseTitle, RelativeSource={RelativeSource AncestorType=UserControl}}" />
+                    Text="{Binding ExpenseTitle, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                    TextWrapping="Wrap" />
                 <TextBlock
                     Grid.Row="1"
                     Grid.Column="0"

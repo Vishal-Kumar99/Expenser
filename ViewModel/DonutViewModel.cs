@@ -18,9 +18,9 @@ namespace Expenser.ViewModel
         {
             DonutSeries =
             [
-                new PieSeries<double> { Values = new List<double> { 40}, Name = "Rent", InnerRadius = 60 },
-                new PieSeries<double> { Values = new List<double> { 40}, Name = "Groceries", InnerRadius = 60 },
-                new PieSeries<double> { Values = new List<double> { 40}, Name = "Utilities", InnerRadius = 60 },
+                new PieSeries<double> { Values = new List<double> { 40}, Name = "Rent"},
+                new PieSeries<double> { Values = new List<double> { 40}, Name = "Groceries"},
+                new PieSeries<double> { Values = new List<double> { 40}, Name = "Utilities"},
             ];
         }
     }
