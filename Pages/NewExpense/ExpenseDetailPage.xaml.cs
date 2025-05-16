@@ -24,5 +24,10 @@ namespace Expenser.Pages.NewExpense
         {
             InitializeComponent();
         }
+
+        private void CreateBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

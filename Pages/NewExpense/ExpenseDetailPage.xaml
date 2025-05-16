@@ -107,19 +107,28 @@
                 VerticalAlignment="Bottom"
                 Orientation="Horizontal">
                 <Button
-                    Width="70"
-                    Height="30"
+                    Width="90"
+                    Height="35"
                     Margin="10,0"
                     Background="#FF6200EE"
                     Command="NavigationCommands.BrowseBack"
-                    Content="Back" />
+                    Content="Back"
+                    Cursor="Hand"
+                    FontSize="16"
+                    Foreground="White"
+                    Style="{DynamicResource NavButton}" />
                 <Button
-                    Width="70"
-                    Height="30"
+                    x:Name="CreateBtn"
+                    Width="90"
+                    Height="35"
                     Margin="10,0"
                     Background="#FF6200EE"
+                    Click="CreateBtn_Click"
                     Content="Create"
-                    Foreground="White" />
+                    Cursor="Hand"
+                    FontSize="16"
+                    Foreground="White"
+                    Style="{DynamicResource NavButton}" />
                 <!--<n:NavButton Text="Create" Width="70" Height="30" Background="#FF6200EE" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" NavUri="/Pages/AddExpensePage.xaml" />-->
                 <!--<Button Content="Create" Width="70" Height="30" Background="#FF6200EE" Foreground="White"/>-->
             </StackPanel>

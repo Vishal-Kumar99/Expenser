@@ -37,7 +37,7 @@
                     FontSize="24"
                     FontWeight="Bold">
                     <Run Text="Welcome To" />
-                    <Run Text="Expenser" Foreground="DodgerBlue"/>
+                    <Run Foreground="DodgerBlue" Text="Expenser" />
                 </TextBlock>
 
                 <StackPanel Grid.Row="1">
@@ -101,12 +101,12 @@
                         x:Name="SignupBtn"
                         Height="50"
                         Margin="10,0"
-                        IsDefault="True"
                         Background="#FF6200EE"
                         Click="SignupBtn_Click"
                         Content="Sign Up"
                         FontSize="18"
                         Foreground="White"
+                        IsDefault="True"
                         Style="{DynamicResource NavButton}" />
                 </DockPanel>
 

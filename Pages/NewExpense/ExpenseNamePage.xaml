@@ -76,19 +76,26 @@
                     Background="#FF6200EE"
                     Command="NavigationCommands.BrowseBack"
                     Content="Back"
-                    FontSize="16" />
+                    Cursor="Hand"
+                    FontSize="16"
+                    Foreground="White"
+                    Style="{DynamicResource NavButton}" />
                 <!--<n:NavButton Text="Next" Width="70" Height="30" Background="#FF6200EE" Foreground="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" NavUri="/Pages/NewExpense/ExpenseDetailPage.xaml" />-->
 
                 <Button
+                    x:Name="NextBtn"
                     Grid.Row="2"
                     Width="90"
                     Height="35"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
                     Background="#FF6200EE"
+                    Click="NextBtn_Click"
                     Content="Next"
+                    Cursor="Hand"
                     FontSize="16"
-                    Foreground="White" />
+                    Foreground="White"
+                    Style="{DynamicResource NavButton}" />
             </StackPanel>
         </Grid>
     </Grid>

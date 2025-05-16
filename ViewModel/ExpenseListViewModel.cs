@@ -31,17 +31,17 @@ namespace Expenser.ViewModel
             //LoadExpenseList();
         }
 
-        //private void LoadExpenseList()
-        //{
-        //    using (var context = new ApplicationDbContext())
-        //    {
-        //        var expenses = context.Expenses.ToList();
-        //        Expenses.Clear();
-        //        foreach (var expense in expenses)
-        //        {
-        //            Expenses.Add(expense);
-        //        }
-        //    }
-        //}
+        private void LoadExpenseList()
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                var expenses = context.Expenses.ToList();
+                Expenses.Clear();
+                foreach (var expense in expenses)
+                {
+                    Expenses.Add(expense);
+                }
+            }
+        }
     }
 }

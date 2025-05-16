@@ -273,19 +273,11 @@
                                     x:Name="ExpenseTypeList"
                                     Grid.Row="1"
                                     Margin="10,10"
+                                    d:ItemsSource="{d:SampleData ItemCount=5}"
                                     FontSize="16"
-                                    ItemsSource="{Binding Expenses}"
                                     ScrollViewer.CanContentScroll="False"
                                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                    ScrollViewer.VerticalScrollBarVisibility="Auto">
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock Width="auto" Text="{Binding ExpenseType.Type}" />
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
+                                    ScrollViewer.VerticalScrollBarVisibility="Auto" />
                             </Grid>
 
                             <Viewbox Grid.Row="1">

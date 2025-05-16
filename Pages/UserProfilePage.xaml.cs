@@ -13,21 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Expenser.Pages.NewExpense
+namespace Expenser.Pages
 {
     /// <summary>
-    /// Interaction logic for ExpenseNamePage.xaml
+    /// Interaction logic for UserProfilePage.xaml
     /// </summary>
-    public partial class ExpenseNamePage : Page
+    public partial class UserProfilePage : Page
     {
-        public ExpenseNamePage()
+        public UserProfilePage()
         {
             InitializeComponent();
-        }
-
-        private void NextBtn_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

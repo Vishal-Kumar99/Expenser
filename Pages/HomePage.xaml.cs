@@ -1,4 +1,5 @@
 ﻿using Expenser.Models;
+using Expenser.Pages.ExpenseType;
 using Expenser.Pages.NewExpense;
 using Expenser.ViewModel;
 using System;
@@ -24,7 +25,7 @@ namespace Expenser.Pages
             {
                 var mainWindow = new MainWindow();
                 mainWindow.Show();
-
+                
                 mainWindow.MainFrame.Navigate(new LoginPage());
 
                 Window.GetWindow(this)?.Close();
@@ -32,9 +33,10 @@ namespace Expenser.Pages
             else
             {
                 LoadUserData();
-            }
+                Func.LoadExpenseType(ExpenseTypeList);
+                this.DataContext = new ExpenseListViewModel();
 
-            this.DataContext = new ExpenseListViewModel();
+            }
         }
 
         private void LoadUserData()
@@ -48,12 +50,14 @@ namespace Expenser.Pages
 
         private void UserProfile_ProfileClicked(object sender, EventArgs e)
         {
+            NavigationService.Navigate(new Uri("Pages/UserProfilePage.xaml", UriKind.Relative));
             //ProfileMenu.Visibility = ProfileMenu.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
         }
 
         private void AddExpenseBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            CreateExpenseWindow createExpenseWindow = new CreateExpenseWindow();
+            createExpenseWindow.ShowDialog();
         }
 
         private void ViewExpenseBtn_Click(object sender, RoutedEventArgs e)
@@ -68,7 +72,13 @@ namespace Expenser.Pages
 
         private void ExpenseTypeBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            var dialog = new ExpenseTypeWindow();
+            Window window = Window.GetWindow(this);
+            dialog.Owner = window;
+            if (dialog.ShowDialog() == true)
+            {
+                Func.LoadExpenseType(ExpenseTypeList);
+            }
         }
 
         //private void Page_MouseDown(object sender, MouseButtonEventArgs e)

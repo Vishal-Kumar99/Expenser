@@ -24,5 +24,10 @@ namespace Expenser.Pages.NewExpense
         {
             InitializeComponent();
         }
+
+        private void NextBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("Pages/NewExpense/ExpenseNamePage.xaml", UriKind.Relative));
+        }
     }
 }
