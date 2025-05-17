@@ -27,6 +27,8 @@ namespace Expenser.Pages
             InitializeComponent();
 
             UsernameTxt.Focus();
+            UsernameTxt.Text = "vishal kumar";
+            PasswordTxt.Password = "12345678";
         }
 
         private void LoginBtn_Click(object sender, RoutedEventArgs e)

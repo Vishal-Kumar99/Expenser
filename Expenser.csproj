@@ -10,8 +10,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\add.png" />
+    <None Remove="Images\delete.png" />
     <None Remove="Images\Expenser.ico" />
     <None Remove="Images\Expenser.png" />
+    <None Remove="Images\ProfileCover.jpg" />
     <None Remove="Images\rupee-sign.ico" />
     <None Remove="Images\rupee-sign.png" />
   </ItemGroup>
@@ -37,10 +40,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\add.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\delete.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\Expenser.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Expenser.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\ProfileCover.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

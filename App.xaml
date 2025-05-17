@@ -10,8 +10,10 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+
                 <ResourceDictionary Source="Styles/ButtonsStyles.xaml" />
                 <ResourceDictionary Source="Styles/BordersStyles.xaml" />
+                <ResourceDictionary Source="Styles/ImagesStyles.xaml" />
 
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign2.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
@@ -24,6 +26,8 @@
             </ResourceDictionary.MergedDictionaries>
 
             <m:ViewModelLocator x:Key="ViewModelLocator" />
+            <vm:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+            <vm:InverseBoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter" />
             <!--<vm:DonutViewModel x:Key="DonutVM" />-->
         </ResourceDictionary>
     </Application.Resources>

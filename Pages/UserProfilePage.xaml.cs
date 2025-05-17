@@ -24,5 +24,45 @@ namespace Expenser.Pages
         {
             InitializeComponent();
         }
+
+        private void HomeBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SettingBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void UserProfileBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void EditCoverImageBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ProfileBtn_Click(object sender, RoutedEventArgs e)
+        {
+            UserDetailsFrame.Source = new Uri("/UserControls/UserDetails/ProfileDetailsControl.xaml", UriKind.Relative);
+        }
+
+        private void IncomeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            UserDetailsFrame.Source = new Uri("/UserControls/UserDetails/IncomeDetailsControl.xaml", UriKind.Relative);
+        }
+
+        private void LocationBtn_Click(object sender, RoutedEventArgs e)
+        {
+            UserDetailsFrame.Source = new Uri("/UserControls/UserDetails/ProfileDetailsControl.xaml", UriKind.Relative);
+        }
+
+        private void BudgetBtn_Click(object sender, RoutedEventArgs e)
+        {
+            UserDetailsFrame.Source = new Uri("/UserControls/UserDetails/BudgetDetailsControl.xaml", UriKind.Relative);
+        }
     }
 }
