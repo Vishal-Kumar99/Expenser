@@ -28,12 +28,12 @@
                     FontSize="12"
                     FontWeight="SemiBold"
                     Foreground="LightSteelBlue"
-                    Text="User Name" />
+                    Text="Name" />
                 <TextBlock
                     Margin="20,0,20,10"
                     FontSize="16"
                     Foreground="SteelBlue"
-                    Text="Vishal Kumar" />
+                    Text="{Binding Name}" />
             </StackPanel>
         </Border>
 
@@ -67,7 +67,7 @@
                         Margin="20,0,20,10"
                         FontSize="16"
                         Foreground="SteelBlue"
-                        Text="Male" />
+                        Text="{Binding Gender}" />
                 </StackPanel>
                 <StackPanel Grid.Row="0" Grid.Column="1">
                     <TextBlock
@@ -80,7 +80,7 @@
                         Margin="20,0,20,10"
                         FontSize="16"
                         Foreground="SteelBlue"
-                        Text="23 November 2000" />
+                        Text="{Binding DOB}" />
                 </StackPanel>
 
                 <StackPanel Grid.Row="1" Grid.Column="0">
@@ -94,7 +94,7 @@
                         Margin="20,0,20,10"
                         FontSize="16"
                         Foreground="SteelBlue"
-                        Text="India" />
+                        Text="{Binding Country}" />
                 </StackPanel>
                 <StackPanel Grid.Row="1" Grid.Column="1">
                     <TextBlock
@@ -107,7 +107,7 @@
                         Margin="20,0,20,10"
                         FontSize="16"
                         Foreground="SteelBlue"
-                        Text="INR" />
+                        Text="{Binding PreferredCurrency}" />
                 </StackPanel>
             </Grid>
         </Border>
@@ -130,7 +130,7 @@
                     Margin="20,0,20,10"
                     FontSize="16"
                     Foreground="SteelBlue"
-                    Text="+91 6207600961" />
+                    Text="{Binding Contact}" />
                 <TextBlock
                     Margin="20,10,20,5"
                     FontSize="12"
@@ -141,7 +141,7 @@
                     Margin="20,0,20,10"
                     FontSize="16"
                     Foreground="SteelBlue"
-                    Text="vishalsharmavishal99@gmail.com" />
+                    Text="{Binding Email}" />
             </StackPanel>
         </Border>
     </Grid>

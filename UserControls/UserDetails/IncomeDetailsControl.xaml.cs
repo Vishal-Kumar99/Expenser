@@ -93,15 +93,6 @@ namespace Expenser.UserControls.UserDetails
 
         private void CancelBtn_Click(object sender, RoutedEventArgs e)
         {
-            //for (int i = _items.Count - 1; i >= 0; i--)
-            //{
-            //    var item = _items[i];
-            //    if (string.IsNullOrWhiteSpace(item.SourceCBox) && string.IsNullOrWhiteSpace(item.AmountBox) && string.IsNullOrWhiteSpace(item.StatusCBox))
-            //    {
-            //        _items.RemoveAt(i);
-            //    }
-            //}
-
             RemoveTrailingEmptyRow();
 
             foreach (var item in _items)

@@ -32,21 +32,21 @@ namespace Expenser.Pages
             }
             else
             {
-                LoadUserData();
+                //LoadUserData();
                 Func.LoadExpenseType(ExpenseTypeList);
                 this.DataContext = new ExpenseListViewModel();
 
             }
         }
 
-        private void LoadUserData()
-        {
-            var user = UserSession.CurrentUser;
-            if (user != null)
-            {
-                UserProfile.UserName = $"{user.Username}";
-            }
-        }
+        //private void LoadUserData()
+        //{
+        //    var user = UserSession.CurrentUser;
+        //    if (user != null)
+        //    {
+        //        UserProfile.UserName = $"{user.Username}";
+        //    }
+        //}
 
         private void UserProfile_ProfileClicked(object sender, EventArgs e)
         {

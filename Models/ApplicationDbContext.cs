@@ -46,8 +46,16 @@ namespace Expenser.Models
         public int Id { get; set; }
         public required string Username { get; set; }
         public required string Password { get; set; }
+        public string? Name { get; set; }
+        public string? Email { get; set; }
+        public string? Contact { get; set; }
+        public string? Gender { get; set; }
+        public string? PreferredCurrency { get; set; }
+        public string? Country { get; set; }
+        public DateTime DOB { get; set; }
         public required string PasswordHint { get; set; }
         public string? ProfileImagePath { get; set; }
+        public string? CoverImagePath { get; set; }
 
         public ICollection<Expense> Expenses { get; set; } = new List<Expense>();
         public ICollection<Income> Incomes { get; set; } = new List<Income>();
@@ -99,6 +107,7 @@ namespace Expenser.Models
         public required decimal Amount { get; set; }
         public required DateTime Date { get; set; }
         public string? Source { get; set; }
+        public string? Status { get; set; }
 
         public User? User { get; set; }
     }

@@ -23,8 +23,9 @@
                     Width="60"
                     Height="60"
                     ClipToBounds="True"
+                    Source="{Binding ProfileImage}"
                     Stretch="UniformToFill"
-                    Visibility="Collapsed">
+                    Visibility="{Binding ProfileImageVisibility}">
                     <Image.Clip>
                         <EllipseGeometry
                             Center="30,30"
@@ -39,8 +40,8 @@
                     FontSize="24"
                     FontWeight="Bold"
                     Foreground="White"
-                    Text="U"
-                    Visibility="Collapsed" />
+                    Text="{Binding InitialText}"
+                    Visibility="{Binding InitialTextVisibility}" />
             </Grid>
 
             <StackPanel
@@ -56,7 +57,7 @@
                     x:Name="UsernameTxt"
                     FontSize="16"
                     FontWeight="Bold"
-                    Text="User Name" />
+                    Text="{Binding UserName}" />
             </StackPanel>
         </StackPanel>
     </Border>
