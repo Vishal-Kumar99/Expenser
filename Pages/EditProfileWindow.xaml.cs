@@ -1,17 +1,6 @@
 ﻿using Expenser.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Expenser.ViewModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Expenser.Pages
 {
@@ -20,13 +9,16 @@ namespace Expenser.Pages
     /// </summary>
     public partial class EditProfileWindow : Window
     {
-        public EditProfileWindow()
+        public EditProfileViewModel EditProfileViewModel { get; private set; }
+        public EditProfileWindow(EditProfileViewModel editProfileViewModel)
         {
             InitializeComponent();
 
             Func.LoadUserDetails();
-            var userDetails = Func.GetUserDetails();
-            this.DataContext = userDetails;
+
+            EditProfileViewModel = editProfileViewModel;
+            //var userDetails = Func.GetUserDetails();
+            this.DataContext = EditProfileViewModel;
         }
 
         private void CloseBtn_Click(object sender, RoutedEventArgs e)
@@ -36,27 +28,29 @@ namespace Expenser.Pages
 
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
-            var user = UserSession.CurrentUser;
+            //var user = UserSession.CurrentUser;
 
-            if (user == null)
+            if (EditProfileViewModel == null)
             {
-                MessageBox.Show("User not found.");
+                MessageBox.Show("User data not found.");
                 return;
             }
 
-            var userDto = new UserDto
-            {
-                Username = user.Username,
-                Name = NameBox.Text,
-                Email = EmailBox.Text,
-                Contact = ContactBox.Text,
-                Gender = GenderBox.Text,
-                Country = CountryBox.Text,
-                DOB = DobDatePicker.SelectedDate ?? DateTime.Now,
-                PreferredCurrency = PrefCurrencyBox.Text,
-            };
+            //var userDto = new UserDto
+            //{
+            //    Username = user.Username,
+            //    Name = NameBox.Text,
+            //    Email = EmailBox.Text,
+            //    Contact = ContactBox.Text,
+            //    Gender = GenderBox.Text,
+            //    Country = CountryBox.Text,
+            //    DOB = DobDatePicker.SelectedDate ?? DateTime.Now,
+            //    PreferredCurrency = PrefCurrencyBox.Text,
+            //};
 
-            Func.SaveUserDetails(userDto);
+            Func.SaveUserDetails(EditProfileViewModel);
+
+            DialogResult = true;
         }
     }
 }

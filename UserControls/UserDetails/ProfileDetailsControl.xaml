@@ -80,7 +80,7 @@
                         Margin="20,0,20,10"
                         FontSize="16"
                         Foreground="SteelBlue"
-                        Text="{Binding DOB}" />
+                        Text="{Binding DOB, StringFormat='{}{0:dd MMMM yyyy}'}" />
                 </StackPanel>
 
                 <StackPanel Grid.Row="1" Grid.Column="0">

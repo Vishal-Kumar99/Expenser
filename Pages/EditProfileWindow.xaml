@@ -64,7 +64,7 @@
                     <Border BorderBrush="LightSteelBlue" Margin="0,10" BorderThickness="2" Background="White" CornerRadius="8">
                         <StackPanel>
                             <TextBlock Text="Name" FontSize="12" Foreground="SteelBlue" FontWeight="SemiBold" Margin="20,10,20,5" />
-                            <TextBox x:Name="NameBox" Text="{Binding Name}" FontSize="14" Width="200" HorizontalAlignment="Left" BorderBrush="SteelBlue" BorderThickness="1" Margin="20,0,0,10" Foreground="SteelBlue" />
+                            <TextBox x:Name="NameBox" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" FontSize="14" Width="200" HorizontalAlignment="Left" BorderBrush="SteelBlue" BorderThickness="1" Margin="20,0,0,10" Foreground="SteelBlue" />
                         </StackPanel>
                     </Border>
 
@@ -81,7 +81,7 @@
 
                             <StackPanel Grid.Row="0" Grid.Column="0">
                                 <TextBlock Text="Gender" FontSize="12" Foreground="SteelBlue" FontWeight="SemiBold" Margin="20,10,20,5" />
-                                <ComboBox x:Name="GenderBox" Text="{Binding Gender}" FontSize="14" Width="200" HorizontalAlignment="Left" Padding="5" BorderBrush="SteelBlue" BorderThickness="1" Margin="20,0,0,10" Foreground="SteelBlue" >
+                                <ComboBox x:Name="GenderBox" Text="{Binding Gender, UpdateSourceTrigger=PropertyChanged}" FontSize="14" Width="200" HorizontalAlignment="Left" Padding="5" BorderBrush="SteelBlue" BorderThickness="1" Margin="20,0,0,10" Foreground="SteelBlue" >
                                     <ComboBoxItem Content="Male"/>
                                     <ComboBoxItem Content="Female"/>
                                     <ComboBoxItem Content="Other"/>
@@ -90,12 +90,12 @@
                             
                             <StackPanel Grid.Row="0" Grid.Column="1">
                                 <TextBlock Text="D.O.B." FontSize="12" Foreground="SteelBlue" FontWeight="SemiBold" Margin="20,10,20,5" />
-                                <DatePicker x:Name="DobDatePicker" Text="{Binding DOB}" FontSize="14" Width="200" HorizontalAlignment="Left" Padding="5" BorderBrush="SteelBlue" BorderThickness="1" Margin="20,0,0,10" Foreground="SteelBlue" />
+                                <DatePicker x:Name="DobDatePicker" SelectedDate="{Binding DOB, UpdateSourceTrigger=PropertyChanged}" FontSize="14" Width="200" HorizontalAlignment="Left" Padding="5" BorderBrush="SteelBlue" BorderThickness="1" Margin="20,0,0,10" Foreground="SteelBlue" />
                             </StackPanel>
                             
                             <StackPanel Grid.Row="1" Grid.Column="0">
                                 <TextBlock Text="Country" FontSize="12" Foreground="SteelBlue" FontWeight="SemiBold" Margin="20,10,20,5" />
-                                <ComboBox x:Name="CountryBox" Text="{Binding Country}" IsEditable="True" IsTextSearchEnabled="True" FontSize="14" Padding="5" Width="200" HorizontalAlignment="Left" BorderBrush="SteelBlue" BorderThickness="1" Margin="20,0,0,10" Foreground="SteelBlue">
+                                <ComboBox x:Name="CountryBox" Text="{Binding Country, UpdateSourceTrigger=PropertyChanged}" IsEditable="True" IsTextSearchEnabled="True" FontSize="14" Padding="5" Width="200" HorizontalAlignment="Left" BorderBrush="SteelBlue" BorderThickness="1" Margin="20,0,0,10" Foreground="SteelBlue">
                                     <ComboBoxItem Content="India" />
                                     <ComboBoxItem Content="USA" />
                                     <ComboBoxItem Content="UK" />
@@ -132,7 +132,7 @@
 
                             <StackPanel Grid.Row="1" Grid.Column="1">
                                 <TextBlock Text="Preferred Currency" FontSize="12" Foreground="SteelBlue" FontWeight="SemiBold" Margin="20,10,20,5" />
-                                <ComboBox x:Name="PrefCurrencyBox" IsEditable="True" IsTextSearchEnabled="True" Text="{Binding PreferredCurrency}" FontSize="14" Width="200" HorizontalAlignment="Left" BorderBrush="SteelBlue" BorderThickness="1" Padding="5" Margin="20,0,0,10" Foreground="SteelBlue" >
+                                <ComboBox x:Name="PrefCurrencyBox" IsEditable="True" IsTextSearchEnabled="True" Text="{Binding PreferredCurrency, UpdateSourceTrigger=PropertyChanged}" FontSize="14" Width="200" HorizontalAlignment="Left" BorderBrush="SteelBlue" BorderThickness="1" Padding="5" Margin="20,0,0,10" Foreground="SteelBlue" >
                                     <ComboBoxItem Content="Rupee (₹)" />
                                     <ComboBoxItem Content="Dollar ($)" />
                                     <ComboBoxItem Content="Euro (€)" />
@@ -166,10 +166,10 @@
                     <Border BorderBrush="LightSteelBlue" Margin="0,10" BorderThickness="2" Background="White" CornerRadius="8">
                         <StackPanel>
                             <TextBlock Text="Phone" FontSize="12" Foreground="SteelBlue" FontWeight="SemiBold" Margin="20,10,20,5" />
-                            <TextBox x:Name="ContactBox" Text="{Binding Contact}" FontSize="14" Width="200" HorizontalAlignment="Left" BorderBrush="SteelBlue" BorderThickness="1" Margin="20,0,0,10" Foreground="SteelBlue" />
+                            <TextBox x:Name="ContactBox" Text="{Binding Contact, UpdateSourceTrigger=PropertyChanged}" FontSize="14" Width="200" HorizontalAlignment="Left" BorderBrush="SteelBlue" BorderThickness="1" Margin="20,0,0,10" Foreground="SteelBlue" />
 
                             <TextBlock Text="Email" FontSize="12" Foreground="SteelBlue" FontWeight="SemiBold" Margin="20,10,20,5" />
-                            <TextBox x:Name="EmailBox" Text="{Binding Email}" FontSize="14" MinWidth="200" Width="auto" HorizontalAlignment="Left" BorderBrush="SteelBlue" BorderThickness="1" Margin="20,0,0,10" Foreground="SteelBlue" />
+                            <TextBox x:Name="EmailBox" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" FontSize="14" MinWidth="200" Width="auto" HorizontalAlignment="Left" BorderBrush="SteelBlue" BorderThickness="1" Margin="20,0,0,10" Foreground="SteelBlue" />
                         </StackPanel>
                     </Border>
 

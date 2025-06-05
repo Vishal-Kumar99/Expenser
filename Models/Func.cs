@@ -1,9 +1,9 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 using System.Security.Cryptography;
 using System.Windows.Controls;
 using Microsoft.EntityFrameworkCore;
 using System.Windows;
+using Expenser.ViewModel;
 
 
 namespace Expenser.Models
@@ -70,13 +70,13 @@ namespace Expenser.Models
             }
         }
 
-        public static UserDto GetUserDetails()
+        public static EditProfileViewModel GetUserDetails()
         {
             var currentUser = UserSession.CurrentUser;
 
             if (currentUser != null)
             {
-                return new UserDto
+                return new EditProfileViewModel
                 {
                     Username = currentUser.Username,
                     Name = currentUser.Name,
@@ -97,9 +97,9 @@ namespace Expenser.Models
             }
         }
 
-        public static void SaveUserDetails(UserDto userDto)
+        public static void SaveUserDetails(EditProfileViewModel editProfileView)
         {
-            if (userDto == null)
+            if (editProfileView == null)
             {
                 MessageBox.Show("Please fill in the fields.");
                 return;
@@ -107,7 +107,7 @@ namespace Expenser.Models
 
             using (var dbContext = new ApplicationDbContext())
             {
-                var user = dbContext.Users.FirstOrDefault(u => u.Username == userDto.Username);
+                var user = dbContext.Users.FirstOrDefault(u => u.Username == editProfileView.Username);
 
                 if (user == null)
                 {
@@ -117,13 +117,13 @@ namespace Expenser.Models
 
                 bool isModified = false;
 
-                if (user.Name != userDto.Name) { user.Name = userDto.Name; isModified = true; }
-                if (user.Gender != userDto.Gender) { user.Gender = userDto.Gender; isModified = true; }
-                if (user.Country != userDto.Country) { user.Country = userDto.Country; isModified = true; }
-                if (user.PreferredCurrency != userDto.PreferredCurrency) { user.PreferredCurrency = userDto.PreferredCurrency; isModified = true; }
-                if (user.DOB != userDto.DOB) { user.DOB = userDto.DOB; isModified = true; }
-                if (user.Contact != userDto.Contact) { user.Contact = userDto.Contact; isModified = true; }
-                if (user.Email != userDto.Email) { user.Email = userDto.Email; isModified = true; }
+                if (user.Name != editProfileView.Name) { user.Name = editProfileView.Name; isModified = true; }
+                if (user.Gender != editProfileView.Gender) { user.Gender = editProfileView.Gender; isModified = true; }
+                if (user.Country != editProfileView.Country) { user.Country = editProfileView.Country; isModified = true; }
+                if (user.PreferredCurrency != editProfileView.PreferredCurrency) { user.PreferredCurrency = editProfileView.PreferredCurrency; isModified = true; }
+                if (user.DOB != editProfileView.DOB) { user.DOB = editProfileView.DOB; isModified = true; }
+                if (user.Contact != editProfileView.Contact) { user.Contact = editProfileView.Contact; isModified = true; }
+                if (user.Email != editProfileView.Email) { user.Email = editProfileView.Email; isModified = true; }
 
                 if (isModified)
                 {
@@ -140,17 +140,17 @@ namespace Expenser.Models
         }
     }
 
-    public class UserDto
-    {
-        public required string Username { get; set; }
-        public string? Name { get; set; }
-        public string? Email { get; set; }
-        public string? Contact { get; set; }
-        public string? Gender { get; set; }
-        public string? PreferredCurrency { get; set; }
-        public string? Country { get; set; }
-        public DateTime DOB { get; set; }
-        public string? ProfileImagePath { get; set; }
-        public string? CoverImagePath { get; set; }
-    }
+    //public class UserDto
+    //{
+    //    public required string Username { get; set; }
+    //    public string? Name { get; set; }
+    //    public string? Email { get; set; }
+    //    public string? Contact { get; set; }
+    //    public string? Gender { get; set; }
+    //    public string? PreferredCurrency { get; set; }
+    //    public string? Country { get; set; }
+    //    public DateTime DOB { get; set; }
+    //    public string? ProfileImagePath { get; set; }
+    //    public string? CoverImagePath { get; set; }
+    //}
 }

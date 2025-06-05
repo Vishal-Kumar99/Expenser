@@ -12,6 +12,7 @@ namespace Expenser.Pages
     /// </summary>
     public partial class UserProfilePage : Page
     {
+        public EditProfileViewModel _editProfileViewModel { get; set; }
         public UserProfilePage()
         {
             InitializeComponent();
@@ -26,6 +27,9 @@ namespace Expenser.Pages
                     ProfileImagePath = user.ProfileImagePath
                 };
             }
+
+            _editProfileViewModel = Func.GetUserDetails();
+            UserDetailsFrame.Content = new UserControls.UserDetails.ProfileDetailsControl { DataContext = _editProfileViewModel };
         }
 
         private void HomeBtn_Click(object sender, RoutedEventArgs e)
@@ -65,13 +69,14 @@ namespace Expenser.Pages
 
         private void EditProfileBtn_Click(object sender, RoutedEventArgs e)
         {
-            var dialog = new EditProfileWindow();
+            var dialog = new EditProfileWindow(_editProfileViewModel);
             Window window = Window.GetWindow(this);
             dialog.Owner = window;
             if (dialog.ShowDialog() == true)
             {
                 Func.LoadUserDetails();
-                Func.GetUserDetails();
+                var updateVm = Func.GetUserDetails();
+                _editProfileViewModel.UpdateForm(updateVm);
             }
         }
 
