@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Expenser.Models;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
@@ -13,53 +12,50 @@ namespace Expenser.ViewModel
         public event PropertyChangedEventHandler? PropertyChanged;
         public void OnPropertyChanged(string propertyName) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        
 
-        private string _sourceCBox { get; set; }
-        private string _amountBox { get; set; }
-        private string _statusCBox { get; set; }
-        private bool _isInEditMode { get; set; }
-        private bool _isLastRow { get; set; }
-
-        public string SourceCBox
+        private ObservableCollection<IncomeItemViewModel> _items = new();
+        public ObservableCollection<IncomeItemViewModel> Items
         {
-            get => _sourceCBox;
-            set { _sourceCBox = value; OnPropertyChanged(nameof(SourceCBox)); OnPropertyChanged(nameof(CanAdd)); }
-        }
-        
-        public string AmountBox
-        {
-            get => _amountBox;
-            set { _amountBox = value; OnPropertyChanged(nameof(AmountBox)); OnPropertyChanged(nameof(CanAdd)); }
+            get => _items;
+            set
+            {
+                if (_items != value)
+                {
+                    _items = value;
+                    OnPropertyChanged(nameof(Items));
+                }
+            }
         }
 
-        public string StatusCBox
+        private string _totalAmount = "0.00";
+        public string TotalAmount
         {
-            get => _statusCBox;
-            set { _statusCBox = value; OnPropertyChanged(nameof(StatusCBox)); OnPropertyChanged(nameof(CanAdd)); }
+            get => _totalAmount;
+            set
+            {
+                if (_totalAmount != value)
+                {
+                    _totalAmount = value;
+                    OnPropertyChanged(nameof(TotalAmount));
+                }
+            }
         }
 
-        public bool IsInEditMode
+        public void UpdateTotalAmount()
         {
-            get => _isInEditMode;
-            set { _isInEditMode = value; OnPropertyChanged(nameof(IsInEditMode)); }
-        }
+            var user = UserSession.CurrentUser;
+            if (user == null)
+            {
+                TotalAmount = "0.00";
+                return;
+            }
 
-        public bool IsLastRow
-        {
-            get => _isLastRow;
-            set { _isLastRow = value; OnPropertyChanged(nameof(IsLastRow)); OnPropertyChanged(nameof(CanAdd)); }
-        }
+            using var context = new ApplicationDbContext();
+            var totalIncome = context.Incomes
+                .Where(i => i.UserId == user.Id)
+                .Sum(i => (decimal?)i.Amount) ?? 0m;
 
-        public bool CanAdd => string.IsNullOrWhiteSpace(SourceCBox) && string.IsNullOrWhiteSpace(AmountBox) && string.IsNullOrWhiteSpace(StatusCBox) && IsLastRow;
-
-        public ObservableCollection<string> SourceOptions { get; set; }
-        public ObservableCollection<string> StatusOptions { get; set; }
-
-        public IncomeSourceViewModel()
-        {
-            SourceOptions = new ObservableCollection<string> { "Salary", "Business", "Investment", "Other" };
-            StatusOptions = new ObservableCollection<string> { "Active", "Inactive" };
+            TotalAmount = totalIncome.ToString("F2", CultureInfo.InvariantCulture);
         }
     }
 

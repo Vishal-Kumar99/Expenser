@@ -33,10 +33,5 @@ namespace Expenser
         {
             Window.GetWindow(this).WindowState = WindowState.Minimized;
         }
-
-        private void HomeMaximizeBtn_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

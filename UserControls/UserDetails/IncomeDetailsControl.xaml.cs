@@ -1,8 +1,6 @@
 ﻿using Expenser.Models;
 using Expenser.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -13,75 +11,106 @@ namespace Expenser.UserControls.UserDetails
     /// </summary>
     public partial class IncomeDetailsControl : UserControl
     {
-        private ObservableCollection<IncomeSourceViewModel> _items;
+        private IncomeSourceViewModel _viewModel;
 
         public IncomeDetailsControl()
         {
             InitializeComponent();
 
-            _items = new ObservableCollection<IncomeSourceViewModel>();
+            _viewModel = new IncomeSourceViewModel();
+            this.DataContext = _viewModel;
+
+            _viewModel.UpdateTotalAmount();
             LoadInitialData();
-            IncomeSourceListView.ItemsSource = _items;
+
+            IncomeSourceListView.ItemsSource = _viewModel.Items;
         }
 
         private void LoadInitialData()
         {
-            _items.Add(new IncomeSourceViewModel
+            using (var context = new ApplicationDbContext())
             {
-                SourceCBox = "Salary",
-                AmountBox = "5000",
-                StatusCBox = "Active"
-            });
+                _viewModel.Items.Clear();
+                var user = UserSession.CurrentUser;
+                if (user == null) return;
+
+                var incomeSources = context.Incomes.Where(i => i.UserId == user.Id).ToList();
+
+                foreach (var record in incomeSources)
+                {
+                    _viewModel.Items.Add(new IncomeItemViewModel
+                    {
+                        SourceCBox = record.Source,
+                        AmountBox = record.Amount.ToString("F2", CultureInfo.InvariantCulture),
+                        StatusCBox = record.Status,
+                        IsInEditMode = false,
+                        IsLastRow = false
+                    });
+                }
+            }
             SetLastRow();
         }
 
         private void SetLastRow()
         {
-            for (int i = 0; i < _items.Count; i++)
+            for (int i = 0; i < _viewModel.Items.Count; i++)
             {
-                _items[i].IsLastRow = (i == _items.Count - 1);
+                _viewModel.Items[i].IsLastRow = (i == _viewModel.Items.Count - 1);
             }
         }
 
         private void RemoveTrailingEmptyRow()
         {
-            var emptyItems = _items.Where(item =>
+            var emptyItems = _viewModel.Items.Where(item =>
                     string.IsNullOrWhiteSpace(item.SourceCBox) &&
                     string.IsNullOrWhiteSpace(item.AmountBox) &&
                     string.IsNullOrWhiteSpace(item.StatusCBox)).ToList();
 
             foreach (var item in emptyItems)
             {
-                _items.Remove(item);
+                _viewModel.Items.Remove(item);
             }
         }
 
         private void AddRowBtn_Click(object sender, RoutedEventArgs e)
         {
-            _items.Add(new IncomeSourceViewModel { IsInEditMode = true });
+            _viewModel.Items.Add(new IncomeItemViewModel { IsInEditMode = true });
             SetLastRow();
         }
 
         private void DeleteRowBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (sender is FrameworkElement fe && fe.DataContext is IncomeSourceViewModel row)
+            if (sender is FrameworkElement fe && fe.DataContext is IncomeItemViewModel row)
             {
-                _items.Remove(row);
+                using (var context = new ApplicationDbContext())
+                {
+                    var user = UserSession.CurrentUser;
+                    if (user == null) return;
+                    var incomeToDelete = context.Incomes.FirstOrDefault(i => i.UserId == user.Id && i.Source == row.SourceCBox);
+                    if (incomeToDelete != null)
+                    {
+                        context.Incomes.Remove(incomeToDelete);
+                        _viewModel.Items.Remove(row);
+                        context.SaveChanges();
+                        _viewModel.UpdateTotalAmount();
+                        MessageBox.Show("Income source deleted successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }
                 SetLastRow();
             }
         }
 
         private void EditListBtn_Click(object sender, RoutedEventArgs e)
         {
-            foreach (var item in _items)
+            foreach (var item in _viewModel.Items)
                 item.IsInEditMode = true;
 
-            if (!_items.Any(item => 
+            if (!_viewModel.Items.Any(item =>
                 string.IsNullOrWhiteSpace(item.SourceCBox) &&
                 string.IsNullOrWhiteSpace(item.AmountBox) &&
                 string.IsNullOrWhiteSpace(item.StatusCBox)))
             {
-                _items.Add(new IncomeSourceViewModel { IsInEditMode = true });
+                _viewModel.Items.Add(new IncomeItemViewModel { IsInEditMode = true });
             }
 
             SetLastRow();
@@ -95,7 +124,7 @@ namespace Expenser.UserControls.UserDetails
         {
             RemoveTrailingEmptyRow();
 
-            foreach (var item in _items)
+            foreach (var item in _viewModel.Items)
                 item.IsInEditMode = false;
 
             SaveIncomeBtn.Visibility = Visibility.Collapsed;
@@ -109,7 +138,9 @@ namespace Expenser.UserControls.UserDetails
         {
             RemoveTrailingEmptyRow();
 
-            foreach (var item in _items)
+            SaveIncomeDetails();
+
+            foreach (var item in _viewModel.Items)
                 item.IsInEditMode = false;
 
             SaveIncomeBtn.Visibility = Visibility.Collapsed;
@@ -146,6 +177,59 @@ namespace Expenser.UserControls.UserDetails
                 {
                     column.Width = columnWidth;
                 }
+            }
+        }
+
+        private void SaveIncomeDetails()
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                var user = UserSession.CurrentUser;
+
+                if (user == null) return;
+
+                foreach (var item in _viewModel.Items)
+                {
+                    var source = item.SourceCBox?.Trim();
+                    var status = item.StatusCBox?.Trim();
+                    var amountText = item.AmountBox?.Trim();
+
+                    if (string.IsNullOrWhiteSpace(source) || string.IsNullOrWhiteSpace(status) || string.IsNullOrWhiteSpace(amountText) || !decimal.TryParse(amountText, out var amount))
+                        continue;
+
+                    var today = DateTime.Now.Date;
+
+                    var existingSource = context.Incomes.FirstOrDefault(i => i.UserId == user.Id && i.Source == item.SourceCBox);
+
+                    if (existingSource != null)
+                    {
+                        if (existingSource.Amount != amount || existingSource.Status != item.StatusCBox)
+                        {
+                            existingSource.Amount = amount;
+                            existingSource.Status = item.StatusCBox;
+                            context.Incomes.Update(existingSource);
+
+                        }
+                    }
+                    else
+                    {
+                        var incomeSource = new Income
+                        {
+                            UserId = user.Id,
+                            Source = source,
+                            Amount = amount,
+                            Status = status,
+                            Date = DateTime.Now,
+                        };
+
+                        context.Incomes.Add(incomeSource);
+                    }
+                }
+                context.SaveChanges();
+
+                _viewModel.UpdateTotalAmount();
+
+                MessageBox.Show("Income sources added successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
     }

@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using Microsoft.EntityFrameworkCore;
 using System.Windows;
 using Expenser.ViewModel;
+using System.Globalization;
 
 
 namespace Expenser.Models
