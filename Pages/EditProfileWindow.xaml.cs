@@ -9,16 +9,14 @@ namespace Expenser.Pages
     /// </summary>
     public partial class EditProfileWindow : Window
     {
-        public EditProfileViewModel EditProfileViewModel { get; private set; }
-        public EditProfileWindow(EditProfileViewModel editProfileViewModel)
+        //public EditProfileViewModel EditProfileViewModel { get; private set; }
+        public EditProfileWindow()
         {
             InitializeComponent();
 
             Func.LoadUserDetails();
 
-            EditProfileViewModel = editProfileViewModel;
-            //var userDetails = Func.GetUserDetails();
-            this.DataContext = EditProfileViewModel;
+            this.DataContext = Func.GetUserDetails();
         }
 
         private void CloseBtn_Click(object sender, RoutedEventArgs e)
@@ -28,27 +26,13 @@ namespace Expenser.Pages
 
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
-            //var user = UserSession.CurrentUser;
-
-            if (EditProfileViewModel == null)
+            if (Func._sharedProfileViewModel == null)
             {
                 MessageBox.Show("User data not found.");
                 return;
             }
 
-            //var userDto = new UserDto
-            //{
-            //    Username = user.Username,
-            //    Name = NameBox.Text,
-            //    Email = EmailBox.Text,
-            //    Contact = ContactBox.Text,
-            //    Gender = GenderBox.Text,
-            //    Country = CountryBox.Text,
-            //    DOB = DobDatePicker.SelectedDate ?? DateTime.Now,
-            //    PreferredCurrency = PrefCurrencyBox.Text,
-            //};
-
-            Func.SaveUserDetails(EditProfileViewModel);
+            Func.SaveUserDetails();
 
             DialogResult = true;
         }

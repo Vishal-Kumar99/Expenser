@@ -4,8 +4,6 @@ using System.Windows.Controls;
 using Microsoft.EntityFrameworkCore;
 using System.Windows;
 using Expenser.ViewModel;
-using System.Globalization;
-
 
 namespace Expenser.Models
 {
@@ -71,36 +69,41 @@ namespace Expenser.Models
             }
         }
 
+        public static EditProfileViewModel _sharedProfileViewModel;
         public static EditProfileViewModel GetUserDetails()
         {
-            var currentUser = UserSession.CurrentUser;
+            if (_sharedProfileViewModel == null)
+            {
+                var currentUser = UserSession.CurrentUser;
 
-            if (currentUser != null)
-            {
-                return new EditProfileViewModel
+                if (currentUser != null)
                 {
-                    Username = currentUser.Username,
-                    Name = currentUser.Name,
-                    Email = currentUser.Email,
-                    Contact = currentUser.Contact,
-                    Gender = currentUser.Gender,
-                    PreferredCurrency = currentUser.PreferredCurrency,
-                    Country = currentUser.Country,
-                    DOB = currentUser.DOB,
-                    ProfileImagePath = currentUser.ProfileImagePath,
-                    CoverImagePath = currentUser.CoverImagePath
-                };
+                    _sharedProfileViewModel = new EditProfileViewModel
+                    {
+                        Username = currentUser.Username,
+                        Name = currentUser.Name,
+                        Email = currentUser.Email,
+                        Contact = currentUser.Contact,
+                        Gender = currentUser.Gender,
+                        PreferredCurrency = currentUser.PreferredCurrency,
+                        Country = currentUser.Country,
+                        DOB = currentUser.DOB,
+                        ProfileImagePath = currentUser.ProfileImagePath,
+                        CoverImagePath = currentUser.CoverImagePath
+                    };
+                }
+                else
+                {
+                    MessageBox.Show("User not found.");
+                    return null;
+                }
             }
-            else
-            {
-                MessageBox.Show("User not found.");
-                return null;
-            }
+            return _sharedProfileViewModel;
         }
 
-        public static void SaveUserDetails(EditProfileViewModel editProfileView)
+        public static void SaveUserDetails()
         {
-            if (editProfileView == null)
+            if (_sharedProfileViewModel == null)
             {
                 MessageBox.Show("Please fill in the fields.");
                 return;
@@ -108,7 +111,7 @@ namespace Expenser.Models
 
             using (var dbContext = new ApplicationDbContext())
             {
-                var user = dbContext.Users.FirstOrDefault(u => u.Username == editProfileView.Username);
+                var user = dbContext.Users.FirstOrDefault(u => u.Username == _sharedProfileViewModel.Username);
 
                 if (user == null)
                 {
@@ -118,13 +121,13 @@ namespace Expenser.Models
 
                 bool isModified = false;
 
-                if (user.Name != editProfileView.Name) { user.Name = editProfileView.Name; isModified = true; }
-                if (user.Gender != editProfileView.Gender) { user.Gender = editProfileView.Gender; isModified = true; }
-                if (user.Country != editProfileView.Country) { user.Country = editProfileView.Country; isModified = true; }
-                if (user.PreferredCurrency != editProfileView.PreferredCurrency) { user.PreferredCurrency = editProfileView.PreferredCurrency; isModified = true; }
-                if (user.DOB != editProfileView.DOB) { user.DOB = editProfileView.DOB; isModified = true; }
-                if (user.Contact != editProfileView.Contact) { user.Contact = editProfileView.Contact; isModified = true; }
-                if (user.Email != editProfileView.Email) { user.Email = editProfileView.Email; isModified = true; }
+                if (user.Name != _sharedProfileViewModel.Name) { user.Name = _sharedProfileViewModel.Name; isModified = true; }
+                if (user.Gender != _sharedProfileViewModel.Gender) { user.Gender = _sharedProfileViewModel.Gender; isModified = true; }
+                if (user.Country != _sharedProfileViewModel.Country) { user.Country = _sharedProfileViewModel.Country; isModified = true; }
+                if (user.PreferredCurrency != _sharedProfileViewModel.PreferredCurrency) { user.PreferredCurrency = _sharedProfileViewModel.PreferredCurrency; isModified = true; }
+                if (user.DOB != _sharedProfileViewModel.DOB) { user.DOB = _sharedProfileViewModel.DOB; isModified = true; }
+                if (user.Contact != _sharedProfileViewModel.Contact) { user.Contact = _sharedProfileViewModel.Contact; isModified = true; }
+                if (user.Email != _sharedProfileViewModel.Email) { user.Email = _sharedProfileViewModel.Email; isModified = true; }
 
                 if (isModified)
                 {

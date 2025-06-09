@@ -53,9 +53,11 @@ namespace Expenser.UserControls.UserDetails
 
         private void SetLastRow()
         {
-            for (int i = 0; i < _viewModel.Items.Count; i++)
+            var rowCount = _viewModel.Items.Count;
+
+            for (int i = 0; i < rowCount; i++)
             {
-                _viewModel.Items[i].IsLastRow = (i == _viewModel.Items.Count - 1);
+                _viewModel.Items[i].IsLastRow = (i == rowCount - 1);
             }
         }
 

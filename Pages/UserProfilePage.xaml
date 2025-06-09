@@ -132,8 +132,8 @@
                     Margin="0,10"
                     Background="SteelBlue"
                     BorderBrush="SteelBlue"
-                    Content="Edit Profile"
                     Click="EditProfileBtn_Click"
+                    Content="Edit Profile"
                     FontSize="16"
                     Foreground="White" />
                 <Button
@@ -142,8 +142,8 @@
                     Margin="0,10"
                     Background="SteelBlue"
                     BorderBrush="SteelBlue"
-                    Content="Settings"
                     Click="SettingBtn_Click"
+                    Content="Settings"
                     FontSize="16"
                     Foreground="White" />
                 <Button

@@ -57,7 +57,7 @@
 
                 <Grid.RowDefinitions>
                     <RowDefinition />
-                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto" />
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
@@ -108,9 +108,9 @@
                     Height="300">
                     <ListView
                         x:Name="IncomeSourceListView"
+                        Height="300"
                         ItemsSource="{Binding Items}"
                         Loaded="IncomeSourceListView_Loaded"
-                        Height="300"
                         ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                         ScrollViewer.VerticalScrollBarVisibility="Auto"
                         SizeChanged="IncomeSourceListView_SizeChanged">
@@ -124,11 +124,11 @@
                                                 <ComboBox
                                                     x:Name="SourceComboBox"
                                                     Width="140"
-                                                    Foreground="SteelBlue"
                                                     Margin="10,0,0,0"
                                                     HorizontalAlignment="Center"
                                                     VerticalAlignment="Center"
                                                     FontSize="16"
+                                                    Foreground="SteelBlue"
                                                     IsEditable="True"
                                                     ItemsSource="{Binding SourceOptions}"
                                                     Text="{Binding SourceCBox, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
@@ -136,10 +136,10 @@
                                                 <TextBlock
                                                     Width="140"
                                                     Margin="10,0,0,0"
-                                                    Foreground="SteelBlue"
                                                     HorizontalAlignment="Center"
                                                     VerticalAlignment="Center"
                                                     FontSize="16"
+                                                    Foreground="SteelBlue"
                                                     Text="{Binding SourceCBox}"
                                                     Visibility="{Binding IsInEditMode, Converter={StaticResource InverseBoolToVisibilityConverter}}" />
                                             </Grid>
@@ -155,19 +155,19 @@
                                                 <TextBox
                                                     Width="140"
                                                     Margin="10,0,0,0"
-                                                    Foreground="SteelBlue"
                                                     HorizontalAlignment="Center"
                                                     VerticalAlignment="Center"
                                                     FontSize="16"
+                                                    Foreground="SteelBlue"
                                                     Text="{Binding AmountBox, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                     Visibility="{Binding IsInEditMode, Converter={StaticResource BoolToVisibilityConverter}}" />
                                                 <TextBlock
                                                     Width="140"
                                                     Margin="10,0,0,0"
-                                                    Foreground="SteelBlue"
                                                     HorizontalAlignment="Center"
                                                     VerticalAlignment="Center"
                                                     FontSize="16"
+                                                    Foreground="SteelBlue"
                                                     Text="{Binding AmountBox}"
                                                     Visibility="{Binding IsInEditMode, Converter={StaticResource InverseBoolToVisibilityConverter}}" />
                                             </Grid>
@@ -184,10 +184,10 @@
                                                     x:Name="StatusComboBox"
                                                     Width="140"
                                                     Margin="10,0,0,0"
-                                                    Foreground="SteelBlue"
                                                     HorizontalAlignment="Center"
                                                     VerticalAlignment="Center"
                                                     FontSize="16"
+                                                    Foreground="SteelBlue"
                                                     IsEditable="True"
                                                     ItemsSource="{Binding StatusOptions}"
                                                     Text="{Binding StatusCBox, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
@@ -195,10 +195,10 @@
                                                 <TextBlock
                                                     Width="140"
                                                     Margin="10,0,0,0"
-                                                    Foreground="SteelBlue"
                                                     HorizontalAlignment="Center"
                                                     VerticalAlignment="Center"
                                                     FontSize="16"
+                                                    Foreground="SteelBlue"
                                                     Text="{Binding StatusCBox}"
                                                     Visibility="{Binding IsInEditMode, Converter={StaticResource InverseBoolToVisibilityConverter}}" />
                                             </Grid>

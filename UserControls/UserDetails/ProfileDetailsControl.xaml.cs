@@ -1,5 +1,4 @@
 ﻿using Expenser.Models;
-using System;
 using System.Windows.Controls;
 
 namespace Expenser.UserControls.UserDetails
@@ -14,8 +13,8 @@ namespace Expenser.UserControls.UserDetails
             InitializeComponent();
 
             Func.LoadUserDetails();
-            var userDetails = Func.GetUserDetails();
-            this.DataContext = userDetails;
+            
+            this.DataContext = Func.GetUserDetails();
         }
     }
 }

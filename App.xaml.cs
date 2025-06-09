@@ -1,7 +1,5 @@
 ﻿using Expenser.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Configuration;
-using System.Data;
 using System.Windows;
 
 namespace Expenser
