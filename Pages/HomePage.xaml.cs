@@ -2,12 +2,8 @@
 using Expenser.Pages.ExpenseType;
 using Expenser.Pages.NewExpense;
 using Expenser.ViewModel;
-using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Navigation;
 
 namespace Expenser.Pages
@@ -25,33 +21,19 @@ namespace Expenser.Pages
             {
                 var mainWindow = new MainWindow();
                 mainWindow.Show();
-                
                 mainWindow.MainFrame.Navigate(new LoginPage());
-
                 Window.GetWindow(this)?.Close();
             }
             else
             {
-                //LoadUserData();
                 Func.LoadExpenseType(ExpenseTypeList);
                 this.DataContext = new ExpenseListViewModel();
-
             }
         }
-
-        //private void LoadUserData()
-        //{
-        //    var user = UserSession.CurrentUser;
-        //    if (user != null)
-        //    {
-        //        UserProfile.UserName = $"{user.Username}";
-        //    }
-        //}
 
         private void UserProfile_ProfileClicked(object sender, EventArgs e)
         {
             NavigationService.Navigate(new Uri("Pages/UserProfilePage.xaml", UriKind.Relative));
-            //ProfileMenu.Visibility = ProfileMenu.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
         }
 
         private void AddExpenseBtn_Click(object sender, RoutedEventArgs e)

@@ -12,7 +12,6 @@
     Background="Transparent"
     MouseDown="Window_MouseDown"
     ResizeMode="NoResize"
-    SizeToContent="WidthAndHeight"
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
     mc:Ignorable="d">

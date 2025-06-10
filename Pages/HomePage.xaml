@@ -17,7 +17,7 @@
     <!--  MouseDown="Page_MouseDown"  -->
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto" />
+            <ColumnDefinition MaxWidth="300" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="300" />
         </Grid.ColumnDefinitions>
@@ -45,13 +45,13 @@
                         Text="Top Expenses" />
 
                     <TextBox
-                        x:Name="SearchBox"
                         Grid.Row="1"
                         Width="250"
                         Height="40"
                         Margin="20,0"
+                        Text="{Binding SearchBox, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                         VerticalContentAlignment="Center"
-                        h:TexboxHelper.Placeholder="Search expenses ..."
+                        Style="{StaticResource WatermarkedTextBox}"
                         FontSize="16" />
 
                     <ListBox
@@ -59,12 +59,13 @@
                         Grid.Row="2"
                         Margin="20,10"
                         FontSize="16"
-                        ItemsSource="{Binding Expenses}">
+                        ScrollViewer.VerticalScrollBarVisibility="Auto"
+                        ItemsSource="{Binding ExpenseView}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Width="auto" Text="{Binding Title}" />
-                                </StackPanel>
+                                <DockPanel>
+                                    <TextBlock Text="{Binding Title}" TextWrapping="Wrap" />
+                                </DockPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>

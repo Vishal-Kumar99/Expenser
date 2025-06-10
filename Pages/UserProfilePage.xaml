@@ -154,7 +154,8 @@
                     BorderBrush="IndianRed"
                     Content="Logout"
                     FontSize="16"
-                    Foreground="White" />
+                    Foreground="White"
+                    Click="LogoutBtn_Click"/>
             </StackPanel>
 
             <Grid Grid.Column="1">

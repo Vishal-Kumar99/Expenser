@@ -1,19 +1,9 @@
 ﻿using Expenser.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Expenser.Pages
 {
@@ -63,11 +53,11 @@ namespace Expenser.Pages
 
             if (rememberMe)
             {
-                SaveCredentials(username);
+                UserSession.SaveCredentials(username);
             }
             else
             {
-                ClearSavedCredentials();
+                UserSession.ClearSavedCredentials();
             }
 
             // Navigate to the home page
@@ -98,13 +88,6 @@ namespace Expenser.Pages
             }
         }
 
-        private void SaveCredentials(string username)
-        {
-            Properties.Settings.Default.SavedUsername = username;
-            Properties.Settings.Default.RememberMe = true;
-            Properties.Settings.Default.Save();
-        }
-
         private void LoadSavedCredentials()
         {
             if (Properties.Settings.Default.RememberMe)
@@ -112,13 +95,6 @@ namespace Expenser.Pages
                 UsernameTxt.Text = Properties.Settings.Default.SavedUsername;
                 RememberMeChk.IsChecked = true;
             }
-        }
-
-        private void ClearSavedCredentials()
-        {
-            Properties.Settings.Default.SavedUsername = string.Empty;
-            Properties.Settings.Default.RememberMe = false;
-            Properties.Settings.Default.Save();
         }
     }
 }

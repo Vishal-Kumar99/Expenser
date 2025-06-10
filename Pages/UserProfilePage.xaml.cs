@@ -80,6 +80,25 @@ namespace Expenser.Pages
             }
         }
 
+        private void LogoutBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("Are you sure you want to logout?", "Logout Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result != MessageBoxResult.Yes)
+            {
+                return;
+            }
+
+            UserSession.CurrentUser = null;
+
+            UserSession.ClearSavedCredentials();
+
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+
+            Window.GetWindow(this)?.Close();
+        }
+
         //public static readonly DependencyProperty UserNameProperty =
         //   DependencyProperty.Register("UserName", typeof(string), typeof(UserProfilePage), new PropertyMetadata(string.Empty, OnUserNameChanged));
 
